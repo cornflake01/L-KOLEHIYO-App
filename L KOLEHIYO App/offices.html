@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office Information</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            background: #002145; 
+           background: -webkit-linear-gradient(to right, #002145, #002145);  
+          background: linear-gradient(to right, #000, #002145);     
+        }
+
+        .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .box {
+        width: 200px;
+        height: 200px;
+        margin: 20px;
+        background-color: #002145;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .box:hover {
+        background-color: #001529;
+    }
+
+    .office-info {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        overflow: auto;
+    }
+
+    .office-details {
+        background-color: white;
+        width: 80%;
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        color: #002145;
+        font-size: 24px;
+    }
+
+    .office-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #002145;
+        text-align: center;
+    }
+
+    .office-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .office-details p {
+        margin-bottom: 10px;
+        color: #002145;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box" onclick="showOfficeInfo('Rector\'s Office')">Rector's Office</div>
+        <div class="box" onclick="showOfficeInfo('Research and Scholarship')">Research and Scholarship</div>
+        <div class="box" onclick="showOfficeInfo('Vice President for Academics')">Vice President for Academics</div>
+        <div class="box" onclick="showOfficeInfo('Vice President for REMI')">Vice President for REMI</div>
+        <div class="box" onclick="showOfficeInfo('Vice President for Administration')">Vice President for Administration</div>
+        <div class="box" onclick="showOfficeInfo('Vice President for Finance')">Vice President for Finance</div>
+        <div class="box" onclick="showOfficeInfo('Academic Office')">Academic Office</div>
+        <div class="box" onclick="showOfficeInfo('Principal\'s Offices')">Principal's Offices</div>
+        <div class="box" onclick="showOfficeInfo('Program Head')">Program Head</div>
+        <div class="box" onclick="showOfficeInfo('Faculty Office')">Faculty Office</div>
+        <div class="box" onclick="showOfficeInfo('Guidance Office')">Guidance Office</div>
+        <div class="box" onclick="showOfficeInfo('Clinic')">Clinic</div>
+        <div class="box" onclick="showOfficeInfo('Computer Laboratory')">Computer Laboratory</div>
+    </div>
+
+    <div class="office-info" id="officeInfo">
+        <div class="office-details">
+            <span class="close-btn" onclick="closeOfficeInfo()">&times;</span>
+            <h2 class="office-title" id="officeTitle"></h2>
+            <img class="office-image" id="officeImage" src="" alt="Office Image">
+            <p id="personInCharge"></p>
+            <p id="directions"></p>
+            <div id="additionalImages"></div>
+        </div>
+    </div>
+
+    <script>
+        function showOfficeInfo(office) {
+            // Display office information
+            document.getElementById('officeTitle').innerText = office;
+            // Fetch office details dynamically (e.g., from a database)
+            // For now, using static data
+            const officeDetails = {
+                "Rector's Office": {
+                    image: "img/rector1.png",
+                    personInCharge: "John Doe",
+                    directions: " Beside Board Room at St. Vicenete Liem de la Paz Building 3rd Floor"
+                },
+                "Research and Scholarship": {
+                    image: "img/research1.png",
+                    personInCharge: "Jane Smith",
+                    directions: "Beside Registrars Office at Our Lady of Manaoag Building 1st Floor"
+                },
+                "Vice President for Academics": {
+                    image: "img/rector1.png",
+                    personInCharge: "John Doe",
+                    directions: "Beside Program Head Office at Our Lady of Manaoag Building 1st Floor"
+                },
+                "Vice President for REMI": {
+                    image: "img/remi1.png",
+                    personInCharge: "Jane Smith",
+                    directions: "#102 St. Vincente Liem de la Paz Building 1st Floor"
+                },
+                "Vice President for Administration": {
+                    image: "img/rector1.png",
+                    personInCharge: "John Doe",
+                    directions: " #101 St. Vincente Liem de la Paz Building 1st Floor"
+                },
+                "Vice President for Finance": {
+                    image: "img/research1.png",
+                    personInCharge: "Jane Smith",
+                    directions: "#103 St. Vicenete Liem de la Paz Building 1st Floor"
+                },
+                "Academic Office": {
+                    image: "img/rector1.png",
+                    personInCharge: "John Doe",
+                    directions: "#103 St. Vicenete Liem de la Paz Building 1st Floor"
+                },
+                "Principal\'s Offices": {
+                    image: "img/research1.png",
+                    personInCharge: "Jane Smith",
+                    directions: "#103 St. Vicenete Liem de la Paz Building 1st Floor"
+                },
+                "Program Head": {
+                    image: "img/proghead.png",
+                    personInCharge: "John Doe",
+                    directions: " Beside Vice Presidents Office at Our Lady of Manaoag Building 1st Floor"
+                },
+                "Faculty Office": {
+                    image: "img/rector1.png",
+                    personInCharge: "John Doe",
+                    directions: "#104 St. Vincente Liem de la Paz Building 1st Floor"
+                },
+                "Guidance Office": {
+                    image: "img/guidoff.png",
+                    personInCharge: "John Doe",
+                    directions: "Located on the 3rd floor, East Wing."
+                },
+                "Clinic": {
+                    image: "img/clinic.png",
+                    personInCharge: "John Doe",
+                    directions: "Located on the 3rd floor, East Wing."
+                },
+                "Computer Laboratory": {
+                    image: "img/comlab.png",
+                    personInCharge: "John Doe",
+                    directions: "Beside Learning Resource Center at Our Lady of Manaoag Building 3rd Floor"
+                },
+                // Add more offices as needed
+            };
+            
+            
+
+            document.getElementById('officeImage').src = officeDetails[office].image;
+            document.getElementById('personInCharge').innerText = "Person in Charge: " + officeDetails[office].personInCharge;
+            document.getElementById('directions').innerText = "Directions: " + officeDetails[office].directions;
+
+            document.getElementById('officeInfo').style.display = 'block';
+        }
+
+        function hideOfficeInfo() {
+            var officeInfo = document.getElementById("officeInfo");
+            officeInfo.style.display = "none";
+        }
+
+        // Close office information popup when clicking outside of it
+        window.onclick = function (event) {
+            var officeInfo = document.getElementById("officeInfo");
+            if (event.target == officeInfo) {
+                officeInfo.style.display = "none";
+            }
+        };
+    </script>
+</body>
+</html>

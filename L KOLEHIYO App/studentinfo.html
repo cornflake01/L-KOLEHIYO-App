@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L-KOLEHIYO Student Information</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #002145;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+            color: #002145;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .action-btns {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .action-btns button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #002145;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .action-btns button:hover {
+            background-color: #00172a;
+        }
+
+        .back-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #002145;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #00172a;
+        }
+
+        /* Side menu styles */
+        .side-menu {
+            background-color: #002145;
+            color: #fff;
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000; /* Ensure the side menu is above other content */
+        }
+
+        .school-info h1 {
+            margin-left: 10px;
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .logo {
+            width: 80px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        ul li {
+            margin: 0 10px;
+        }
+
+        ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background-color 0.3s;
+            padding: 10px 20px;
+        }
+
+        ul li a:hover {
+            background-color: #003669;
+        }
+    </style>
+</head>
+<body>
+    <!-- Side Menu -->
+    <div class="side-menu">
+        <div class="school-info">
+            <img src="./img/maltese_cross.png" alt="letran-logo" class="logo" />
+            <h1>L KOLEHIYO</h1>
+        </div>
+        <ul>
+            <li>
+                <a href="addstudent.html"><i class="fas fa-id-card"></i> Add New Students</a>
+            </li>
+            <li>
+                <a href="uploadgrades.html"><i class="fas fa-file-upload"></i> Grades Upload</a>
+            </li>
+            <li>
+                <a href="events.html"><i class="fas fa-calendar-alt"></i> School Events</a>
+            </li>
+    
+            <li>
+                <a href="feedbacks.html"><i class="fa fa-comments"></i> Feedback/Concerns</a>
+            </li>
+            <li>
+                <a href="announcements.html"><i class="fas fa-bullhorn"></i> Announcements</a>
+            </li>
+            <li>
+                <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h2>L-KOLEHIYO Student Information</h2>
+        <table id="studentTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>LRN Number</th>
+                    <th>Email</th>
+                    <th>Strand</th>
+                    <th>Grade Level</th>
+                    <th>Section</th>
+                    <th>Username</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Student data will be inserted here dynamically -->
+            </tbody>
+        </table>
+
+        <!-- Action buttons -->
+        <div class="action-btns">
+            <button id="addStudentBtn">Add Student</button>
+            <button id="deleteSelectedBtn">Delete Selected</button>
+        </div>
+
+        <!-- Back button -->
+        <button class="back-btn" onclick="history.back()">Go to Dashboard <i class="fas fa-arrow-right"></i></button>
+    </div>
+
+    <script type="module" src="studentinfo.js"></script>
+</body>
+</html>

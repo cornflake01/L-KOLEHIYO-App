@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L-KOLEHIYO Announcements</title>
+    <!-- Bootstrap CSS -->
+    <script src="https://kit.fontawesome.com/e410dd328b.js" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('img/bg.jpg'); /* Background image */
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center; /* Center the background image */
+            padding: 20px;
+            margin: 0; /* Remove default margin */
+            height: 100vh; /* Ensure full height */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto; /* Center the container horizontally */
+            background-color: rgba(255, 255, 255, 0.9); /* White background with transparency */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5); /* Shadow effect */
+            padding: 20px;
+        }
+
+        .announcement-title {
+            color: #002145;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .announcement-feed {
+            margin-top: 20px;
+        }
+
+        .announcement-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .announcement-title {
+            font-weight: bold;
+            color: #002145;
+            margin-bottom: 5px;
+        }
+
+        .announcement-date {
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .announcement-description {
+            color: #333;
+        }
+
+        /* Side menu styles */
+        .side-menu {
+            background-color: #002145;
+            color: #fff;
+            height: 100vh;
+            width: 20%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: width 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            z-index: 1000; /* Ensure the side menu is above other content */
+        }
+
+        .side-menu:hover {
+            width: 20%;
+        }
+
+        .school-info {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 2px solid transparent;
+            transition: width 0.3s, border-bottom 0.3s;
+        }
+
+        .school-info:hover {
+            width: 100%;
+            border-bottom: 2px solid #fff;
+        }
+
+        .school-info h1 {
+            margin-left: 10px;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .logo {
+            width: 80px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        ul li {
+            flex-grow: 1;
+        }
+
+        ul li a {
+            display: flex;
+            align-items: center;
+            padding: 30px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            font-size: 18px;
+        }
+
+        ul li a:hover {
+            background-color: #003669;
+        }
+
+        ul li a i {
+            font-size: 32px;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+<!-- Side Menu -->
+<div class="side-menu">
+    <div class="school-info">
+        <img src="./img/maltese_cross.png" alt="letran-logo" class="logo" />
+        <h1>L KOLEHIYO</h1>
+    </div>
+    <ul>
+        <li>
+            <a href="studentinformation.html"><i class="fas fa-id-card"></i> Profile</a>
+        </li>
+        <li>
+            <a href="studentgrades.html"><i class="fas fa-file-upload"></i> Academic Performance</a>
+        </li>
+        <li>
+            <a href="studentevents.html"><i class="fas fa-calendar-alt"></i> School Events</a>
+        </li>
+        <li>
+            <a href="offices.html"><i class="fas fa-map-marker-alt"></i> Office Location</a>
+        </li>
+        <li>
+            <a href="studentfeedbackform.html"><i class="fa fa-comments"></i> Feedback/Concerns</a>
+        </li>
+        <li>
+            <a href="studentannouncements.html"><i class="fas fa-bullhorn"></i> Announcements</a>
+        </li>
+        <li>
+            <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </li>
+    </ul>
+</div>
+
+<div class="container">
+    <h1 class="announcement-title">L-KOLEHIYO Announcements</h1>
+
+    <div class="announcement-feed" id="announcementFeed">
+        <!-- Announcement cards will be dynamically inserted here -->
+    </div>
+</div>
+
+<!-- Firebase JavaScript SDK -->
+<script type="module">
+    // Import the necessary Firebase modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js";
+
+    // Your Firebase configuration
+    const firebaseConfig = {
+  apiKey: "AIzaSyB-W9ZBwlkefbJjicz9Mw0OuUrWI6FHnWk",
+  authDomain: "l-kolehiyo-8b253.firebaseapp.com",
+  databaseURL: "https://l-kolehiyo-8b253-default-rtdb.firebaseio.com",
+  projectId: "l-kolehiyo-8b253",
+  storageBucket: "l-kolehiyo-8b253.appspot.com",
+  messagingSenderId: "289094522635",
+  appId: "1:289094522635:web:5db3616b0468d52888b40e",
+  measurementId: "G-P8QC5255QR"
+};
+    // Initialize Firebase
+    const firebaseApp = initializeApp(firebaseConfig);
+    const database = getDatabase(firebaseApp);
+
+    // Reference to the announcements node
+    const announcementsRef = ref(database, 'announcements');
+
+    // Function to display announcements
+    function displayAnnouncements(data) {
+        const announcements = data.val();
+        const announcementFeed = document.getElementById('announcementFeed');
+
+        // Clear existing content
+        announcementFeed.innerHTML = '';
+
+        for (let key in announcements) {
+            const announcement = announcements[key];
+            const announcementCard = document.createElement('div');
+            announcementCard.classList.add('announcement-card');
+
+            const titleElement = document.createElement('h3');
+            titleElement.classList.add('announcement-title');
+            titleElement.textContent = announcement.title;
+
+            const dateElement = document.createElement('p');
+            dateElement.classList.add('announcement-date');
+            dateElement.textContent = announcement.date;
+
+            const descriptionElement = document.createElement('p');
+            descriptionElement.classList.add('announcement-description');
+            descriptionElement.textContent = announcement.description;
+
+            announcementCard.appendChild(titleElement);
+            announcementCard.appendChild(dateElement);
+            announcementCard.appendChild(descriptionElement);
+
+            announcementFeed.appendChild(announcementCard);
+        }
+    }
+
+    // Listen for changes in the announcements data
+    onValue(announcementsRef, displayAnnouncements);
+</script>
+</body>
+</html>

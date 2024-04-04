@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e410dd328b.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .announcement-title {
+            color: #002145;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #002145;
+            color: white;
+        }
+
+        .btn-custom {
+            background-color: #002145;
+            color: white;
+            margin-right: 5px;
+        }
+
+        .btn-custom:hover {
+            background-color: #002145;
+            color: white;
+        }
+
+        /* Side menu styles */
+        .side-menu {
+            background-color: #002145;
+            color: #fff;
+            width: 20%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: width 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            z-index: 1000; /* Ensure the side menu is above other content */
+        }
+
+        .side-menu:hover {
+            width: 20%;
+        }
+
+        .school-info {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 2px solid transparent;
+            transition: width 0.3s, border-bottom 0.3s;
+        }
+
+        .school-info:hover {
+            width: 100%;
+            border-bottom: 2px solid #fff;
+        }
+
+        .school-info h1 {
+            margin-left: 10px;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .logo {
+            width: 80px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        ul li {
+            flex-grow: 1;
+        }
+
+        ul li a {
+            display: flex;
+            align-items: center;
+            padding: 30px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            font-size: 18px;
+        }
+
+        ul li a:hover {
+            background-color: #003669;
+        }
+
+        ul li a i {
+            font-size: 32px;
+            margin-right: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="side-menu">
+    <div class="school-info">
+        <img src="./img/maltese_cross.png" alt="letran-logo" class="logo" />
+        <h1>L KOLEHIYO</h1>
+    </div>
+    <ul>
+        <li>
+            <a href="addstudent.html"><i class="fas fa-id-card"></i> Add New Students</a>
+        </li>
+        <li>
+            <a href="studentinfo.html"><i class="fas fa-id-card"></i> Student Information</a>
+          </li>
+        <li>
+            <a href="uploadgrades.html"><i class="fas fa-file-upload"></i> Grades Upload</a>
+        </li>
+        <li>
+            <a href="events.html"><i class="fas fa-calendar-alt"></i> School Events</a>
+        </li>
+        <li>
+            <a href="feedbacks.html"><i class="fa fa-comments"></i> Feedback/Concerns</a>
+        </li>
+        <li>
+            <a href="announcements.html"><i class="fas fa-bullhorn"></i> Announcements</a>
+        </li>
+        <li>
+            <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </li>
+    </ul>
+</div>
+
+<div class="container">
+    <h1 class="announcement-title">Announcements</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="announcementTableBody">
+            <!-- Announcement data will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <a href="addannouncement.html" class="btn btn-custom">Add Announcement</a>
+</div>
+
+<!-- Firebase JavaScript SDK -->
+<script type="module">
+    // Import the necessary Firebase modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+    import { getDatabase, ref, onValue, remove, update } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js";
+
+    // Your Firebase configuration
+    const firebaseConfig = {
+  apiKey: "AIzaSyB-W9ZBwlkefbJjicz9Mw0OuUrWI6FHnWk",
+  authDomain: "l-kolehiyo-8b253.firebaseapp.com",
+  databaseURL: "https://l-kolehiyo-8b253-default-rtdb.firebaseio.com",
+  projectId: "l-kolehiyo-8b253",
+  storageBucket: "l-kolehiyo-8b253.appspot.com",
+  messagingSenderId: "289094522635",
+  appId: "1:289094522635:web:5db3616b0468d52888b40e",
+  measurementId: "G-P8QC5255QR"
+};
+
+    // Initialize Firebase
+    const firebaseApp = initializeApp(firebaseConfig);
+    const database = getDatabase(firebaseApp);
+
+    // Reference to the announcements node
+    const announcementsRef = ref(database, 'announcements');
+
+    // Function to display announcements
+    function displayAnnouncements(data) {
+        const announcements = data.val();
+        let announcementRows = '';
+
+        for (let key in announcements) {
+            announcementRows += `
+                <tr>
+                    <td>${announcements[key].title}</td>
+                    <td>${announcements[key].date}</td>
+                    <td>${announcements[key].description}</td>
+                    <td>
+                        <button class="btn btn-custom editBtn" data-id="${key}">Edit</button>
+                        <button class="btn btn-danger deleteBtn" data-id="${key}">Delete</button>
+                    </td>
+                </tr>
+            `;
+        }
+
+        document.getElementById('announcementTableBody').innerHTML = announcementRows;
+
+        // Add event listeners to edit and delete buttons
+        const editButtons = document.querySelectorAll('.editBtn');
+        const deleteButtons = document.querySelectorAll('.deleteBtn');
+
+        editButtons.forEach(button => {
+            button.addEventListener('click', handleEdit);
+        });
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', handleDelete);
+        });
+    }
+
+    // Listen for changes in the announcements data
+    onValue(announcementsRef, displayAnnouncements);
+
+    // Function to handle edit button click
+    function handleEdit(event) {
+        const announcementId = event.target.getAttribute('data-id');
+        const announcementRef = ref(database, `announcements/${announcementId}`);
+
+        // Get the announcement data
+        const title = prompt('Enter new title:');
+        const date = prompt('Enter new date:');
+        const description = prompt('Enter new description:');
+
+        // Update the announcement data in Firebase
+        update(announcementRef, {
+            title: title,
+            date: date,
+            description: description
+        });
+    }
+
+    // Function to handle delete button click
+    function handleDelete(event) {
+        const confirmation = confirm('Are you sure you want to delete this announcement?');
+
+        if (confirmation) {
+            const announcementId = event.target.getAttribute('data-id');
+            const announcementRef = ref(database, `announcements/${announcementId}`);
+
+            // Remove the announcement data from Firebase
+            remove(announcementRef);
+        }
+    }
+</script>
+</body>
+</html>

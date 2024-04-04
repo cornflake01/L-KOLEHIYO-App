@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+          integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+          crossorigin="anonymous"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #002145;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: left;
+            margin-top: 10px; /* Adjusted margin */
+            color: #002145;
+            margin-left: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #002145;
+        }
+
+        th:nth-child(1),
+        td:nth-child(1) {
+            width: 25%;
+        }
+
+        th:nth-child(2),
+        td:nth-child(2),
+        th:nth-child(3),
+        td:nth-child(3) {
+            width: 30%;
+        }
+
+        th:nth-child(4),
+        td:nth-child(4) {
+            width: 35%;
+            text-align: right; /* Aligning "Action" title to the right */
+        }
+
+        .action-btns {
+            margin-top: 10px; /* Adjusted margin */
+            text-align: center;
+        }
+
+        .action-btns button {
+            margin: 0 10px;
+            padding: 12px 20px;
+            background-color: #002145;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .action-btns button:hover {
+            background-color: #00172a;
+        }
+
+        /* Side menu styles */
+        .side-menu {
+            background-color: #002145;
+            color: #fff;
+            width: 20%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: width 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            z-index: 1000; /* Ensure the side menu is above other content */
+        }
+
+        .side-menu:hover {
+            width: 20%;
+        }
+
+        .school-info {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 2px solid transparent;
+            transition: width 0.3s, border-bottom 0.3s;
+        }
+
+        .school-info:hover {
+            width: 100%;
+            border-bottom: 2px solid #fff;
+        }
+
+        .school-info h1 {
+            margin-left: 10px;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .logo {
+            width: 80px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        ul li {
+            flex-grow: 1;
+        }
+
+        ul li a {
+            display: flex;
+            align-items: center;
+            padding: 30px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            font-size: 18px;
+        }
+
+        ul li a:hover {
+            background-color: #003669;
+        }
+
+        ul li a i {
+            font-size: 32px;
+            margin-right: 20px;
+        }
+
+        /* Adjust container padding */
+        .container {
+            padding-left: 25%; /* Set padding on the left side of the container */
+            padding-right: 20px; /* Add some padding on the right side to create space between content and side menu */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            margin-top: 30px; /* Adjusted margin */
+        }
+
+        @media (max-width: 768px) {
+            /* Adjust container padding for smaller screens */
+            .container {
+                padding-left: 0; /* Remove left padding on smaller screens */
+                padding-right: 0; /* Remove right padding on smaller screens */
+            }
+        }
+
+        body {
+            background: url('background-image.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="side-menu">
+        <div class="school-info">
+            <img src="./img/maltese_cross.png" alt="letran-logo" class="logo" />
+            <h1>L KOLEHIYO</h1>
+        </div>
+        <ul>
+            <li>
+                <a href="addstudent.html"><i class="fas fa-id-card"></i> Add New Students</a>
+                <li>
+                    <a href="studentinfo.html"><i class="fas fa-id-card"></i> Student Information</a>
+                  </li>
+            </li>
+            <li>
+                <a href="uploadgrades.html"><i class="fas fa-file-upload"></i> Grades Upload</a>
+            </li>
+            <li>
+                <a href="events.html"><i class="fas fa-calendar-alt"></i> School Events</a>
+            </li>
+
+            <li>
+                <a href="feedbacks.html"><i class="fa fa-comments"></i> Feedback/Concerns</a>
+            </li>
+            <li>
+                <a href="announcements.html"><i class="fas fa-bullhorn"></i> Announcements</a>
+            </li>
+            <li>
+                <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="container">
+        <h2>Events</h2>
+        <table id="eventTable">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th style="text-align: right;">Action</th> <!-- Aligning "Action" title to the right -->
+                </tr>
+            </thead>
+            <tbody id="eventBody">
+                <!-- Event data will be inserted here dynamically -->
+            </tbody>
+        </table>
+
+        <!-- Action buttons -->
+        <div class="action-btns">
+            <button id="addEventBtn"><i class="fas fa-plus"></i> Add Event</button>
+            <button id="deleteEventBtn"><i class="fas fa-trash-alt"></i> Delete Event</button>
+        </div>
+    </div>
+
+    <script type="module" src="events.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <link rel="stylesheet" href="studentProfile.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Student Profile</h1>
+    <div id="profileCard" class="profile-card">
+        <div class="profile-info">
+            <h2 id="name"></h2>
+            <p id="lrn"></p>
+            <p id="email"></p>
+            <p id="strand"></p>
+            <p id="grade"></p>
+            <p id="section"></p>
+            <p id="username"></p>
+        </div>
+    </div>
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-database-compat.js"></script>
+
+<!-- Your Firebase configuration -->
+<script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA4SI2yXymjL4cwtVvKtCxGTQOeMvU968w",
+      authDomain: "l-kolehiyo-capstone.firebaseapp.com",
+      projectId: "l-kolehiyo-capstone",
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Get reference to Firebase database
+    const db = firebase.database();
+
+    // Get currently logged in user
+    const currentUser = firebase.auth().currentUser;
+
+    // Get reference to user's data in Firebase
+    const userRef = db.ref('students/' + currentUser.email);
+
+    // Fetch user's data from Firebase
+    userRef.once('value', (snapshot) => {
+        const userData = snapshot.val();
+        if (userData) {
+            // Populate profile with user data
+            document.getElementById('name').innerText = "Name: " + userData.name;
+            document.getElementById('lrn').innerText = "LRN: " + userData.lrn;
+            document.getElementById('email').innerText = "Email: " + userData.email;
+            document.getElementById('strand').innerText = "Strand: " + userData.strand;
+            document.getElementById('grade').innerText = "Grade: " + userData.grade;
+            document.getElementById('section').innerText = "Section: " + userData.section;
+            document.getElementById('username').innerText = "Username: " + userData.username;
+        } else {
+            console.error("User data not found");
+        }
+    });
+</script>
+
+</body>
+</html>

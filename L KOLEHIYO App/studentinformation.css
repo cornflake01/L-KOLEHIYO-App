@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+
+body {
+    background-image: url('img/bg.jpg'); /* Background image */
+    background-color: #002145;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background: linear-gradient(to right, #000, #002145);
+}
+
+section {
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 30px;
+    padding: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Added box shadow */
+    width: 700px;
+    height: 500px;
+    background-color: #fff; /* Changed background color to white */
+    position: relative;
+}
+
+.right-container {
+    flex: 1;
+    height: 430px;
+    padding: 10px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h3 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 5px;
+    color: #002145; /* Font color */
+}
+
+.gradienttext {
+    background-image: linear-gradient(to right, #FFFFFF 0%, #FFFFFF 100%);
+    color: transparent;
+    -webkit-background-clip: text;
+    text-align: center;
+}
+
+table {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 280px;
+    border-collapse: collapse;
+    margin-top: 50px;
+}
+
+td {
+    text-align: center;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    color: #002145; /* Font color */
+}
+
+form input[type="button"] {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    transition: all 0.3s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+form input[type="button"]:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
